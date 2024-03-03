@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PodcastProphet</title>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond" />
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
+
+        <style>
+{{STYLESHEET}}
+        </style>
+
+
+    </head>
+    <body>
+        <div class='page'>
+        <br>
+        <div class='center'>
+            <img src="/static/icon1.png">
+
+
+        </div>
+
+        <div class='center'>
+            <h1 style='padding-top: 0'>
+                <span class='span1'>Podcast</span><span class='span2'>Prophet</span>
+            </h1>
+        </div>
+        <br>
+
+        <div class='center'>
+            <form method="POST">
+                Please Enter Fitness Podcast Link:
+                <br>
+                <br>
+                <input type="text" name="InputLink" class='textbox'>
+                <br>
+                <br>
+                <input type="submit" value="Submit" class='button'>
+            </form>
+        </div>
+
+        <br>
+
+        {% if output.link == '-' %}
+
+        <div class='center'>
+            Please input a fitness podcast link. More links at <a class=normallink href=https://podcasts.apple.com/us/genre/podcasts-health-fitness-fitness/id1514>iTunes Preview</a>.
+        </div>
+
+        {% elif output.error == 'ERROR' %}
+
+        <div class='center'>Something went wrong getting &quot;{{output.link}}&quot;</div>
+
+        {% else %}
+
+        <div class='center output_container'>
+            <div class='output_article'>
+                Podcast name: <a class=normallink href='{{output.link}}'>{{output.name}}</a>
+            </div>
+            <br><br>
+            <a class='output_class' href='{{output.link}}'>{{output.rating_level}}</a>
+            <br><br>
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt;'>
+                    The <i>Podcast</i> is rated as
+                    {{output.rating_level}}
+            </div>
+
+
+            <br><br>
+
+            {% if output.score0 == 0 %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Information score: <font color=#9932CC>N/A</font>
+            </div>
+            {% else %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Information score: <font color=#9932CC>{{output.score0}}</font>
+            </div>
+            {% endif %}
+
+
+            {% if output.score1 == 0 %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Emotion score: <font color=#9932CC>N/A</font>
+            </div>
+            {% else %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Emotion score: <font color=#9932CC>{{output.score1}}</font>
+            </div>
+            {% endif %}
+
+
+            {% if output.score2 == 0 %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Advertisement score: <font color=#9932CC>N/A</font>
+            </div>
+            {% else %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Advertisement score: <font color=#9932CC>{{output.score2}}</font>
+            </div>
+            {% endif %}
+
+
+            {% if output.score3 == 0 %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Audio score: <font color=#9932CC>N/A</font>
+            </div>
+            {% else %}
+            <div class='output_flavor' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Audio score: <font color=#9932CC>{{output.score3}}</font>
+            </div>
+            {% endif %}
+
+
+
+            <br><br>
+            {% if output.score0 == 0 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    N/A
+            </div>
+            {% elif output.score0 > 2 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    The information is helpful. &#x1F44D
+            </div>
+            {% else %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Need more helpful information. &#x1F641
+            </div>
+            {% endif %}
+
+
+            {% if output.score1 == 0 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    N/A
+            </div>
+            {% elif output.score1 > 2 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    The emotion it conveys is quite positive. &#x1F44D
+            </div>
+            {% else %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Need more positive emotion. &#x1F641
+            </div>
+            {% endif %}
+
+
+            {% if output.score2 == 0 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    N/A
+            </div>
+            {% elif output.score2 > 2 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    The ads are fine. &#x1F44D
+            </div>
+            {% else %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Need to adjust the ads. &#x1F641
+            </div>
+            {% endif %}
+
+
+            {% if output.score3 == 0 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    N/A
+            </div>
+            {% elif output.score3 > 2 %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    The audio quality is fine. &#x1F44D
+            </div>
+            {% else %}
+            <div class='output_class' style='width: 100%; display: inline-block; font-size: 20pt; margin: 20px'>
+                    Need to adjust the audio quality. &#x1F641
+            </div>
+            {% endif %}
+
+
+        </div>
+
+        {% endif %}
+        <br><br>
+        <br><br>
+
+        </div>
+    </body>
+</html>
